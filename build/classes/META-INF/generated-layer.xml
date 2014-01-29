@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
+                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Project">
+            <file name="ca-weblite-codename1-mirah-CreateMirahProject.instance">
+                <!--ca.weblite.codename1.mirah.CreateMirahProject-->
+                <attr
+                    bundlevalue="ca.weblite.codename1.mirah.Bundle#CTL_CreateMirahProject" name="displayName"/>
+                <attr name="instanceCreate" newvalue="ca.weblite.codename1.mirah.CreateMirahProject"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Loaders">
+        <folder name="Languages">
+            <folder name="Actions">
+                <file name="ca-weblite-codename1-mirah-CreateMirahProject.shadow">
+                    <!--ca.weblite.codename1.mirah.CreateMirahProject-->
+                    <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-CreateMirahProject.instance"/>
+                    <attr intvalue="1250" name="position"/>
+                </file>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="Projects">
+        <folder name="Actions">
+            <file name="ca-weblite-codename1-mirah-CreateMirahProject.shadow">
+                <!--ca.weblite.codename1.mirah.CreateMirahProject-->
+                <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-CreateMirahProject.instance"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

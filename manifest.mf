@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: ca.weblite.codename1.mirah
+OpenIDE-Module-Localizing-Bundle: ca/weblite/codename1/mirah/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
