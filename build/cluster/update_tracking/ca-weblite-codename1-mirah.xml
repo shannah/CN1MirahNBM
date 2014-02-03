@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="ca.weblite.codename1.mirah">
-    <module_version install_time="1390958288835" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1391471654994" last="true" origin="installer" specification_version="1.0">
         <file crc="1386941485" name="config/Modules/ca-weblite-codename1-mirah.xml"/>
-        <file crc="399987046" name="modules/ca-weblite-codename1-mirah.jar"/>
+        <file crc="40500304" name="modules/ca-weblite-codename1-mirah.jar"/>
     </module_version>
 </module>

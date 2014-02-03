@@ -24,6 +24,7 @@
 		<exec executable="jruby" dir="./src">
 			<arg value="-S"/>
 			<arg value = "mirahc"/>
+                        <arg value="-N"/>
 			<arg value="--bootclasspath"/>
 			<arg file="${cldc.jar}"/>
 			<arg line="-c '${codenameone.jar}':../build/classes:'${project.dir}/build/classes'" />

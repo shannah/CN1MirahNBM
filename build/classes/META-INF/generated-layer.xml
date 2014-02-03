@@ -10,25 +10,39 @@
                     bundlevalue="ca.weblite.codename1.mirah.Bundle#CTL_CreateMirahProject" name="displayName"/>
                 <attr name="instanceCreate" newvalue="ca.weblite.codename1.mirah.CreateMirahProject"/>
             </file>
+            <file name="ca-weblite-codename1-mirah-OpenMirahProjectDirectory.instance">
+                <!--ca.weblite.codename1.mirah.OpenMirahProjectDirectory-->
+                <attr
+                    bundlevalue="ca.weblite.codename1.mirah.Bundle#CTL_OpenMirahProjectDirectory" name="displayName"/>
+                <attr name="instanceCreate" newvalue="ca.weblite.codename1.mirah.OpenMirahProjectDirectory"/>
+            </file>
+            <file name="ca-weblite-codename1-mirah-UpdateMirahBuildFile.instance">
+                <!--ca.weblite.codename1.mirah.UpdateMirahBuildFile-->
+                <attr
+                    bundlevalue="ca.weblite.codename1.mirah.Bundle#CTL_UpdateMirahBuildFile" name="displayName"/>
+                <attr name="instanceCreate" newvalue="ca.weblite.codename1.mirah.UpdateMirahBuildFile"/>
+            </file>
         </folder>
     </folder>
-    <folder name="Loaders">
-        <folder name="Languages">
+    <folder name="Projects">
+        <folder name="org-netbeans-modules-java-j2seproject">
             <folder name="Actions">
                 <file name="ca-weblite-codename1-mirah-CreateMirahProject.shadow">
                     <!--ca.weblite.codename1.mirah.CreateMirahProject-->
                     <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-CreateMirahProject.instance"/>
-                    <attr intvalue="1250" name="position"/>
+                    <attr intvalue="791" name="position"/>
+                </file>
+                <file name="ca-weblite-codename1-mirah-OpenMirahProjectDirectory.shadow">
+                    <!--ca.weblite.codename1.mirah.OpenMirahProjectDirectory-->
+                    <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-OpenMirahProjectDirectory.instance"/>
+                    <attr intvalue="791" name="position"/>
+                </file>
+                <file name="ca-weblite-codename1-mirah-UpdateMirahBuildFile.shadow">
+                    <!--ca.weblite.codename1.mirah.UpdateMirahBuildFile-->
+                    <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-UpdateMirahBuildFile.instance"/>
+                    <attr intvalue="792" name="position"/>
                 </file>
             </folder>
-        </folder>
-    </folder>
-    <folder name="Projects">
-        <folder name="Actions">
-            <file name="ca-weblite-codename1-mirah-CreateMirahProject.shadow">
-                <!--ca.weblite.codename1.mirah.CreateMirahProject-->
-                <attr name="originalFile" stringvalue="Actions/Project/ca-weblite-codename1-mirah-CreateMirahProject.instance"/>
-            </file>
         </folder>
     </folder>
 </filesystem>

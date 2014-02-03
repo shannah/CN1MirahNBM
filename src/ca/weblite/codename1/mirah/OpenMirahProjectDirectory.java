@@ -27,15 +27,14 @@ import org.openide.util.NbBundle.Messages;
 
 @ActionID(
         category = "Project",
-        id = "ca.weblite.codename1.mirah.CreateMirahProject"
-        
+        id = "ca.weblite.codename1.mirah.OpenMirahProjectDirectory"
 )
 @ActionRegistration(
-        displayName = "#CTL_CreateMirahProject"
+        displayName = "#CTL_OpenMirahProjectDirectory"
 )
 @ActionReference(path="Projects/org-netbeans-modules-java-j2seproject/Actions",  position=791)
-@Messages("CTL_CreateMirahProject=Create Mirah Project")
-public class CreateMirahProject extends AbstractAction implements ContextAwareAction {
+@Messages("CTL_OpenMirahProjectDirectory=Open Mirah Project Folder")
+public class OpenMirahProjectDirectory extends AbstractAction implements ContextAwareAction {
     private static final Logger LOG =
     Logger.getLogger("ca.weblite.codename1.mirah.CreateMirahProject");
     public @Override void actionPerformed(ActionEvent e) {assert false;}
@@ -57,7 +56,7 @@ public class CreateMirahProject extends AbstractAction implements ContextAwareAc
             
             FileObject mirahProject = p.getProjectDirectory().getFileObject("mirah");
             if ( mirahProject != null ){
-                setEnabled(false);
+                setEnabled(true);
             }
             /*
             String projectType = p.getClass().getName();
@@ -76,14 +75,14 @@ public class CreateMirahProject extends AbstractAction implements ContextAwareAc
                     */
             putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
             // TODO menu item label with optional mnemonics
-            putValue(NAME, "Generate Mirah Project");
+            putValue(NAME, "Open Mirah Project Folder");
         }
         public @Override void actionPerformed(ActionEvent e) {
             LOG.warning( "Hello world");
             // TODO what to do when run
            try {
                 MirahProject mp = MirahProject.getMirahSubproject(p);
-                mp.generateProject();
+                //mp.generateProject();
                 FileObject dir = mp.getProjectRoot();
                 Desktop.getDesktop().open(new File(dir.toURI().getPath()));
             } catch ( Exception ex){

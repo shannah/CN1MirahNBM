@@ -5,9 +5,7 @@
  */
 package ca.weblite.codename1.mirah;
 
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -27,15 +25,15 @@ import org.openide.util.NbBundle.Messages;
 
 @ActionID(
         category = "Project",
-        id = "ca.weblite.codename1.mirah.CreateMirahProject"
+        id = "ca.weblite.codename1.mirah.UpdateMirahBuildFile"
         
 )
 @ActionRegistration(
-        displayName = "#CTL_CreateMirahProject"
+        displayName = "#CTL_UpdateMirahBuildFile"
 )
-@ActionReference(path="Projects/org-netbeans-modules-java-j2seproject/Actions",  position=791)
-@Messages("CTL_CreateMirahProject=Create Mirah Project")
-public class CreateMirahProject extends AbstractAction implements ContextAwareAction {
+@ActionReference(path="Projects/org-netbeans-modules-java-j2seproject/Actions",  position=792)
+@Messages("CTL_UpdateMirahBuildFile=Update Mirah Build File")
+public class UpdateMirahBuildFile extends AbstractAction implements ContextAwareAction {
     private static final Logger LOG =
     Logger.getLogger("ca.weblite.codename1.mirah.CreateMirahProject");
     public @Override void actionPerformed(ActionEvent e) {assert false;}
@@ -56,7 +54,7 @@ public class CreateMirahProject extends AbstractAction implements ContextAwareAc
             }
             
             FileObject mirahProject = p.getProjectDirectory().getFileObject("mirah");
-            if ( mirahProject != null ){
+            if ( mirahProject == null ){
                 setEnabled(false);
             }
             /*
@@ -76,16 +74,14 @@ public class CreateMirahProject extends AbstractAction implements ContextAwareAc
                     */
             putValue(DynamicMenuContent.HIDE_WHEN_DISABLED, true);
             // TODO menu item label with optional mnemonics
-            putValue(NAME, "Generate Mirah Project");
+            putValue(NAME, "Update Mirah Build Script");
         }
         public @Override void actionPerformed(ActionEvent e) {
-            LOG.warning( "Hello world");
             // TODO what to do when run
            try {
                 MirahProject mp = MirahProject.getMirahSubproject(p);
-                mp.generateProject();
-                FileObject dir = mp.getProjectRoot();
-                Desktop.getDesktop().open(new File(dir.toURI().getPath()));
+                mp.refreshBuildFile();
+                DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Your Mirah Build Script has been updated to the latest version."));
             } catch ( Exception ex){
                 
                 DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(ex.getMessage()));
