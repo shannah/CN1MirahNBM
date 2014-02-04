@@ -11,6 +11,8 @@
     <property name="codenameone.jar" location="${project.dir}/lib/CodenameOne.jar"/>
     <property name="library.name" value="MirahLibrary"/>
 
+    
+    
     <target name="build">
     	<delete dir="./build"/>
     	<mkdir dir="./build"/>
@@ -38,5 +40,9 @@
 			<fileset dir="./build/classes"/>
 		</copy>
 
+    </target>
+    
+    <target name="run" depends="build">
+    	<ant dir="${project.dir}" target="run"/>
     </target>
 </project>
