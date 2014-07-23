@@ -6,12 +6,27 @@
 
 package ca.weblite.codename1.mirah;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.net.URI;
+import org.netbeans.api.java.classpath.ClassPath;
+import org.netbeans.api.java.project.JavaProjectConstants;
+import org.netbeans.api.java.project.classpath.ProjectClassPathModifier;
 import org.netbeans.api.project.Project;
+import org.netbeans.api.project.ProjectManager;
+import org.netbeans.api.project.ProjectUtils;
+import org.netbeans.api.project.SourceGroup;
+import org.netbeans.api.project.Sources;
+import org.netbeans.spi.project.support.ant.AntProjectHelper;
+import org.netbeans.spi.project.support.ant.SourcesHelper;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -29,8 +44,12 @@ public class MirahProject {
     
     
     public void generateProject() throws IOException{
+        
+        
         refreshBuildFile();
         refreshSampleSourceFile();
+        copyLibs(true);
+        addSourceDirectory();
         
     }
     
@@ -89,6 +108,39 @@ public class MirahProject {
         return projectRoot.getFileObject("Hello.mirah");
     }
     
+    private void copyLibs(boolean overwrite) throws IOException {
+        String[] libs = new String[]{"mirah.jar", "mirahc.jar", "MirahAnt.jar"};
+        for ( String lib : libs ){
+            copyLib(lib, overwrite);
+        }
+    }
+    
+    private void copyLib(String name, boolean overwrite) throws IOException {
+        OutputStream os = null;
+        InputStream is = null;
+        try {
+            is = CreateMirahProject.class.getResourceAsStream("libs/"+name);
+            FileObject libFolder = projectRoot.getFileObject("lib");
+            if ( libFolder == null ){
+                projectRoot.createFolder("lib");
+                libFolder = projectRoot.getFileObject("lib");
+            }
+            FileObject libFile = libFolder.getFileObject(name);
+            if ( libFile != null && overwrite ){
+                libFile.delete();
+            } else if ( libFile != null && !overwrite ){
+                return;
+            }
+            
+            os = libFolder.createAndOpen(name);
+            FileUtil.copy(is, os);
+            
+        } finally {
+            try { is.close();} catch ( Exception ex){}
+            try {os.close();} catch (Exception ex){}
+        }
+    }
+    
     public FileObject refreshBuildFile() throws IOException {
         OutputStream os = null;
         InputStream is = null;
@@ -136,6 +188,51 @@ public class MirahProject {
         return sourceFile;
     }
     
+    
+    protected final boolean addSourceDirectory() {
+        OutputStream os = null;
+        try {
+            
+            
+            //System.out.println("Helper is "+helper);
+            
+            FileObject rootDir = parent.getProjectDirectory();
+            FileObject projectXML = rootDir.getFileObject("nbproject/project.xml");
+            String contents = projectXML.asText();
+            if ( contents.indexOf("<root id=\"src.src.dir\">") == -1 ){
+                contents = contents.replace("<source-roots>", "<source-roots><root id=\"src.src.dir\"/>");
+                os = projectXML.getOutputStream();
+                Writer w = new PrintWriter(os);
+                w.write(contents);
+                w.close();
+            }
+            
+            os = null;
+            
+            FileObject projectProps = rootDir.getFileObject("nbproject/project.properties");
+            contents = projectProps.asText();
+            if ( contents.indexOf("src.src.dir") == -1 ){
+                contents += "\nfile.reference.mirah-src=mirah/src\nsrc.src.dir=${file.reference.mirah-src}";
+                os = projectProps.getOutputStream();
+                Writer w = new PrintWriter(os);
+                w.write(contents);
+                w.close();
+            }
+            
+            
+            return true;
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        } catch (UnsupportedOperationException ex) {
+            Exceptions.printStackTrace(ex);
+        } finally {
+            try {
+                os.close();
+            } catch (Exception ex){}
+        }
+        
+        return false;
+    }
     
     
    

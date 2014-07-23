@@ -10,7 +10,11 @@
     <property name="cldc.jar" location="${project.dir}/lib/CLDC11.jar"/>
     <property name="codenameone.jar" location="${project.dir}/lib/CodenameOne.jar"/>
     <property name="library.name" value="MirahLibrary"/>
+    <property name="javac.source" value="${project.dir}/src"/>
+    <property name="libs.mirah-all.classpath" value="lib/mirah.jar:lib/mirahc.jar:lib/mirahAnt.jar"/>
 
+    
+    <taskdef name="mirahc" classpath="${libs.mirah-all.classpath}:${javac.classpath}" classname="ca.weblite.mirah.ant.MirahcTask"/>
     
     
     <target name="build">
@@ -23,17 +27,17 @@
     	<delete dir="./dist"/>
     	<mkdir dir="./dist"/>
     	
-		<exec executable="jruby" dir="./src">
-			<arg value="-S"/>
-			<arg value = "mirahc"/>
-                        <arg value="-N"/>
-			<arg value="--bootclasspath"/>
-			<arg file="${cldc.jar}"/>
-			<arg line="-c '${codenameone.jar}':../build/classes:'${project.dir}/build/classes'" />
-			<arg value="-d" />
-			<arg value="../build/classes/" />
-			<arg value="." />
-		</exec>
+    	<mirahc dest="build/classes">
+            <javac bootclasspath="${cldc.jar}" destdir="../build/classes/"  includeantruntime="false" source="1.5" sourcepath="${javac.source}:src" srcdir="src" target="1.5">
+                <classpath>
+                    <path path="${codenameone.jar}:../build/classes:${project.dir}/build/classes"/>
+                </classpath>
+                <compilerarg line="${javac.compilerargs}"/>
+
+            </javac>
+        </mirahc>
+
+    	
 		<zip basedir="./build/classes" compress="false" destfile="build/lib/main.zip" />
 		<zip basedir="./build/lib" compress="true" destfile="${project.dir}/lib/${library.name}.cn1lib"/>
 		<copy todir="${project.dir}/lib/impl/cls" overwrite="true">
